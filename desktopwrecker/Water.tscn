@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 1, 1 )
+
+[node name="Water" type="RigidBody2D"]
+gravity_scale = 8.31
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 2.0
+margin_bottom = 2.0
+color = Color( 0.0313726, 0.545098, 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 1 )
+shape = SubResource( 20 )

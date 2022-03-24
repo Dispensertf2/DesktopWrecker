@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Car.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/randomobjects.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=25]
+resource_name = "Exploded"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "Normal"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=27]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 47, 30.5 )
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 47.5, 19 )
+
+[sub_resource type="RectangleShape2D" id=29]
+extents = Vector2( 60, 37.5 )
+
+[node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2( 224, 14 )
+gravity_scale = 9.63
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
+anims/Exploded = SubResource( 25 )
+anims/Normal = SubResource( 26 )
+anims/RESET = SubResource( 27 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1, 16 )
+shape = SubResource( 28 )
+
+[node name="DeathZone" type="Area2D" parent="." groups=["deathzone"]]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DeathZone"]
+position = Vector2( 1.5, 55 )
+shape = SubResource( 30 )
+
+[node name="ExplosionZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ExplosionZone"]
+position = Vector2( 4, 10.5 )
+shape = SubResource( 29 )
+
+[connection signal="area_entered" from="ExplosionZone" to="." method="_on_ExplosionZone_area_entered"]
