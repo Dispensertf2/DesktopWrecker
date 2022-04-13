@@ -32,4 +32,5 @@ func _on_ExplosionZone_area_entered(area):
 		exploder = true
 		$AnimationPlayer.play("Exploded")
 	if area.is_in_group("Hit"):
-		motion.x = -5
+		if exploded == false:
+			motion.x = -5

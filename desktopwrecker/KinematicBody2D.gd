@@ -3,11 +3,14 @@ extends KinematicBody2D
 var up = Vector2(0,-1)
 
 const BloodGenerator = preload("res://BloodGenerator.tscn")
+const explode = preload("res://Explosion.tscn")
 
 var rng = RandomNumberGenerator.new()
 var status = 0
 var flipped = false
 var dead = false
+
+var exploder = false
 
 var bleeding = false
 
@@ -18,8 +21,18 @@ var walkspeed = 20
 var motion = Vector2()
 
 func _ready():
+	
 	rng.randomize()
-
+	
+	var expl = rng.randi_range(0,2)
+	
+	if expl == 1:
+		exploder = true 
+	else:
+		exploder = false
+	
+	
+	
 func _physics_process(delta):
 	motion.y += gravity
 	
@@ -46,6 +59,10 @@ func _physics_process(delta):
 			$AnimationPlayer.play("WalkReverse")
 			motion.x = -walkspeed
 	if dead == true:
+		
+		if exploder == true:
+			explode()
+			exploder = false
 		
 		$Timer.stop()
 		$AnimationPlayer.play("Dead")
@@ -83,6 +100,10 @@ func _on_Area2D_area_entered(area):
 	if area.is_in_group("explosion") or area.is_in_group("Bullet") or area.is_in_group("Hit") or area.is_in_group("deathzone"):
 		dead = true
 	
+func explode():
+	var explodeere = explode.instance()
+	get_parent().add_child(explodeere)
+	explodeere.position = $Sprite.global_position
 	
 			
 		
