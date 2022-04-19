@@ -16,6 +16,8 @@ const Car = preload("res://Car.tscn")
 const Grenade = preload("res://Grenade.tscn")
 const StickGuys = preload("res://KinematicBody2D.tscn")
 const Water = preload("res://Water.tscn")
+const GrenadeAirstrike = preload("res://GrenadeAirstrike.tscn")
+
 #Audio
 onready var player = $AudioStreamPlayer2D
 
@@ -67,7 +69,10 @@ func _process(delta):
 				car.position = $Cursor.global_position
 			else:
 				entitytype = 0
-				
+		elif mode == 7:
+			var gn = GrenadeAirstrike.instance()
+			get_parent().add_child(gn)
+			
 			
 		
 	
@@ -114,6 +119,8 @@ func _process(delta):
 			$AnimationPlayer.play("Grenade")
 		elif mode == 6:
 			$AnimationPlayer.play("Add")
+		elif mode == 7:
+			$AnimationPlayer.play("Airstrike")
 			
 		else:
 			mode = 0
