@@ -88,6 +88,7 @@ tracks/0/keys = {
 extents = Vector2( 10, 23 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+show_behind_parent = true
 position = Vector2( 169, 362 )
 script = ExtResource( 1 )
 

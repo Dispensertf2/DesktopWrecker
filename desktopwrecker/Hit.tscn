@@ -5,6 +5,7 @@
 [ext_resource path="res://Hit2.tscn" type="PackedScene" id=3]
 
 [node name="Hit" type="Node2D"]
+show_behind_parent = true
 script = ExtResource( 2 )
 
 [node name="Hit" parent="." instance=ExtResource( 3 )]

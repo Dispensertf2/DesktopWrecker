@@ -6,6 +6,7 @@
 extents = Vector2( 1, 1 )
 
 [node name="Blood" type="RigidBody2D"]
+show_behind_parent = true
 gravity_scale = 8.31
 script = ExtResource( 1 )
 

@@ -58,6 +58,7 @@ extents = Vector2( 47.5, 19 )
 extents = Vector2( 60, 37.5 )
 
 [node name="RigidBody2D" type="RigidBody2D"]
+show_behind_parent = true
 position = Vector2( 224, 14 )
 gravity_scale = 9.63
 script = ExtResource( 1 )

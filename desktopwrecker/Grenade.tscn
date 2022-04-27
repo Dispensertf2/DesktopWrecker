@@ -8,6 +8,7 @@ radius = 8.0
 height = 8.0
 
 [node name="Grenade" type="RigidBody2D"]
+show_behind_parent = true
 position = Vector2( 97, 104 )
 gravity_scale = 5.85
 script = ExtResource( 2 )

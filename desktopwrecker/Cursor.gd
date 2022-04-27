@@ -17,6 +17,9 @@ const Grenade = preload("res://Grenade.tscn")
 const StickGuys = preload("res://KinematicBody2D.tscn")
 const Water = preload("res://Water.tscn")
 const GrenadeAirstrike = preload("res://GrenadeAirstrike.tscn")
+const Fly = preload("res://Fly.tscn")
+const Block = preload("res://block.tscn")
+const Boulder = preload("res://Boulder.tscn")
 
 #Audio
 onready var player = $AudioStreamPlayer2D
@@ -67,12 +70,30 @@ func _process(delta):
 				var car = Car.instance()
 				get_parent().add_child(car)
 				car.position = $Cursor.global_position
+			elif entitytype == 3:
+				var fly = Fly.instance()
+				get_parent().add_child(fly)
+				fly.position = $Cursor.global_position
+			elif entitytype == 4:
+				var block = Block.instance()
+				get_parent().add_child(block)
+				block.position = $Cursor.global_position
+			elif entitytype == 5:
+				var boulder = Boulder.instance()
+				get_parent().add_child(boulder)
+				boulder.position = $Cursor.global_position
 			else:
 				entitytype = 0
 		elif mode == 7:
 			var gn = GrenadeAirstrike.instance()
 			get_parent().add_child(gn)
-			
+		elif mode == 8:
+			$AnimationPlayer.play("FlyswatterSwat")
+			var hit = Hit.instance()
+			get_parent().add_child(hit)
+			hit.position = $Cursor.global_position
+			player.stream = load("res://Assets/Audio/swat.wav")
+			player.play()
 			
 		
 	
@@ -121,6 +142,8 @@ func _process(delta):
 			$AnimationPlayer.play("Add")
 		elif mode == 7:
 			$AnimationPlayer.play("Airstrike")
+		elif mode == 8:
+			$AnimationPlayer.play("Flyswatter")
 			
 		else:
 			mode = 0

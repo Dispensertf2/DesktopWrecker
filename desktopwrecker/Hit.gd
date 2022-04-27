@@ -21,3 +21,8 @@ func _ready():
 
 func _on_Timer_timeout():
 	self.queue_free()
+
+
+func _on_Area2D_area_entered(area):
+	if area.is_in_group("button"):
+		print("lol")

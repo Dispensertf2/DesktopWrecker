@@ -8,6 +8,7 @@ _data = {
 }
 
 [node name="GrenadeAirstrike" type="Node2D"]
+show_behind_parent = true
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 25 )
